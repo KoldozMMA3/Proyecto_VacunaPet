@@ -4,7 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 
 import { LocationModule } from './location/location.module';
-/* bd inactiva*///import { PrismaModule } from './prisma/prisma.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { LocationModule } from './location/location.module';
         'subscriptions-transport-ws': true,
       },
     }),
-/* bd inactiva*///    PrismaModule,
+    PrismaModule,
     LocationModule,
   ],
 })
