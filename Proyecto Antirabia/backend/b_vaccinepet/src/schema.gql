@@ -26,12 +26,12 @@ type User {
 type Query {
   locations: [Location!]!
   latestLocationByUser(userId: String!): Location
-  login(usuario: String!, contrasena: String!): User
 }
 
 type Mutation {
   createLocation(input: CreateLocationInput!): Location!
   register(input: CreateUserInput!): User!
+  login(usuario: String!, contrasena: String!): User
 }
 
 input CreateLocationInput {

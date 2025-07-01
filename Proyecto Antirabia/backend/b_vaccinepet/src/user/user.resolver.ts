@@ -19,7 +19,7 @@ export class UserResolver {
     return this.userService.create(input.nombre, input.usuario, input.contrasena);
   }
 
-  @Query(() => User, { nullable: true })
+  @Mutation(() => User, { nullable: true })
   async login(@Args('usuario') usuario: string, @Args('contrasena') contrasena: string) {
     const user = await this.userService.findByUsuario(usuario);
     if (user && user.contrasena === contrasena) return user;

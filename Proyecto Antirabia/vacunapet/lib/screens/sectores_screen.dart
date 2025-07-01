@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'login_screen.dart';
 import 'puntos_fijos_screen.dart';
 import 'puntos_moviles_screen.dart';
 import 'informacion_screen.dart'; // Asegúrate de importar la nueva pantalla
@@ -6,11 +8,31 @@ import 'informacion_screen.dart'; // Asegúrate de importar la nueva pantalla
 class SectoresScreen extends StatelessWidget {
   const SectoresScreen({super.key});
 
+  Future<void> _logout(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userId'); // elimina los datos guardados
+    await prefs.remove('nombre');
+
+    // Navega al login (puedes cambiar a pushNamed si usas rutas)
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (_) => LoginScreen()),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sectores de Vacunación'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            tooltip: 'Cerrar sesión',
+            onPressed: () => _logout(context),
+          ),
+        ],
       ),
       // Agregamos el menú de hamburguesa (Drawer)
       drawer: Drawer(

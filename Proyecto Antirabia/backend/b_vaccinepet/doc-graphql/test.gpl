@@ -32,3 +32,10 @@ mutation {
     usuario
   }
 }
+# Ver si funciona laconsulta al login
+mutation {
+  login(usuario: "juan123", contrasena: "secreta") {
+    id
+    nombre
+  }
+}
