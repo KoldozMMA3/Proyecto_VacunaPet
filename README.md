@@ -37,3 +37,98 @@ Mapa interactivo mostrando puntos de vacunación personas móviles.
 
 ![image](https://github.com/user-attachments/assets/f9e43800-27d7-41c6-a024-65d4980280b3)
 
+## Probar la aplicacion
+
+1:ingresas a la ruta donde se encuentra la carpeta 
+C:..\backend\b_vaccinepet
+2:abres un terminal desde la ruta de la carpeta de b_vaccinepet y ejecutas estos comandos:
+npm install -D typescript ts-node     (Instalador de note)
+npx prisma db push                    (Reconoce valores de Prisma)
+npm run start:dev                     (enciendes el servidor local)
+
+3: ingresas a la carpeta de vacunapet \Proyecto Antirabia\vacunapet
+abres un emulador luego colocas este comando en la terminal de la carpeta que ingresamos  flutter run este ejecutara el programa si no respetas el orden no podras abrir la aplicacion porque el servidor estara apagado
+
+4: En tu navegador ingresa estar ruta: http://localhost:3000/graphql
+
+5: valores para realizar pruebas
+# Para probar si funcion la tabla USER
+
+// crear uno por uno cada usuario
+mutation {
+  register(input: {
+    nombre: "Juan Pérez",
+    usuario: "juan123",
+    contrasena: "secreta"
+  }) {
+    id
+    nombre
+    usuario
+  }
+}
+
+mutation {
+  register(input: {
+    nombre: "eduardo",
+    usuario: "edu123",
+    contrasena: "1234"
+  }) {
+    id
+    nombre
+    usuario
+  }
+}
+
+mutation {
+  register(input: {
+    nombre: "cristian",
+    usuario: "cris123",
+    contrasena: "secret1"
+  }) {
+    id
+    nombre
+    usuario
+  }
+}
+
+mutation {
+  register(input: {
+    nombre: "fernando",
+    usuario: "fernando123",
+    contrasena: "clave123"
+  }) {
+    id
+    nombre
+    usuario
+  }
+}
+
+
+
+// crear uno por uno cada usuario
+mutation {
+  createLocation(input: {userId: "cris", latitude: -16.413969, longitude: -71.507865}) {
+    id
+    timestamp
+  }
+}
+
+
+mutation {
+  createLocation(input: {userId: "ana", latitude: 
+-16.409688, longitude: -71.517521}) {
+    id
+    timestamp
+  }
+}
+
+
+
+mutation {
+  createLocation(input: {userId: "juan", latitude: -16.414669, longitude: -71.498166}) {
+    id
+    timestamp
+  }
+}
+
+
