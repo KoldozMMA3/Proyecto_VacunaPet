@@ -40,42 +40,48 @@ class _PuntosFijosScreenState extends State<PuntosFijosScreen> {
         Marker(
           markerId: MarkerId("punto_fijo_1"),
           position: _puntoFijo1,
-          infoWindow: InfoWindow(title: "Punto Fijo 1"),
+          infoWindow: InfoWindow(title: "Punto Fijo 1",
+              snippet: "Horario: 9:00 AM - 11:30 AM"),
         ),
       );
       _markers.add(
         Marker(
           markerId: MarkerId("punto_fijo_2"),
           position: _puntoFijo2,
-          infoWindow: InfoWindow(title: "Punto Fijo 2"),
+          infoWindow: InfoWindow(title: "Punto Fijo 2",
+              snippet: "Horario: 9:00 AM - 12:30 PM"),
         ),
       );
       _markers.add(
         Marker(
           markerId: MarkerId("punto_fijo_3"),
           position: _puntoFijo3,
-          infoWindow: InfoWindow(title: "Punto Fijo 3"),
+          infoWindow: InfoWindow(title: "Punto Fijo 3",
+              snippet: "Horario: 9:00 AM - 1:00 PM"),
         ),
       );
       _markers.add(
         Marker(
           markerId: MarkerId("punto_fijo_4"),
           position: _puntoFijo4,
-          infoWindow: InfoWindow(title: "Punto Fijo 4"),
+          infoWindow: InfoWindow(title: "Punto Fijo 4",
+              snippet: "Horario: 9:00 AM - 1:30 PM"),
         ),
       );
       _markers.add(
         Marker(
           markerId: MarkerId("punto_fijo_5"),
           position: _puntoFijo5,
-          infoWindow: InfoWindow(title: "Punto Fijo 5"),
+          infoWindow: InfoWindow(title: "Punto Fijo 5",
+              snippet: "Horario: 9:00 AM - 1:30 PM"),
         ),
       );
       _markers.add(
         Marker(
           markerId: MarkerId("punto_fijo_6"),
           position: _puntoFijo6,
-          infoWindow: InfoWindow(title: "Punto Fijo 6"),
+          infoWindow: InfoWindow(title: "Punto Fijo 6",
+              snippet: "Horario: 9:00 AM - 1:30 PM"),
         ),
       );
     });

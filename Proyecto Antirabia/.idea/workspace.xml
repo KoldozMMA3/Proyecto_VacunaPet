@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3535032-22f4-4f76-84da-e01c0bb94d0d" name="Changes" comment="" />
+    <list default="true" id="d3535032-22f4-4f76-84da-e01c0bb94d0d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/vacunapet/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vacunapet/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vacunapet/lib/screens/puntos_moviles_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/vacunapet/lib/screens/puntos_moviles_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vacunapet/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/vacunapet/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vacunapet/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/vacunapet/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vacunapet/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/vacunapet/pubspec.yaml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,10 +19,13 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2yShJonh3hGkHjGU39Ml5GWq7QZ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -26,11 +35,14 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "D:/AplicativosMovilesFlutter/Proyecto_VacunaPet/Proyecto Antirabia/vacunapet"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/AplicativosMovilesFlutter/Proyecto_VacunaPet/Proyecto Antirabia/vacunapet",
+    "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
