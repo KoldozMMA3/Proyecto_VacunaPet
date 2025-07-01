@@ -36,4 +36,5 @@ Pantalla de puntos fijos
 
 Mapa interactivo mostrando puntos de vacunación personas móviles.
 
-![image](https://github.com/user-attachments/assets/3e72bb78-b7b9-4071-973b-7080af7b13bd)
+![image](https://github.com/user-attachments/assets/f9e43800-27d7-41c6-a024-65d4980280b3)
+
