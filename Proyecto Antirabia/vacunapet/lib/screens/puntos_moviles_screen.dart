@@ -1,9 +1,13 @@
+// lib/screens/puntos_moviles_screen.dart
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:vacunapet/graphql/location_send_mutation.dart';
+import '../graphql/graphql_config.dart';
+import '../graphql/location_subscription.dart';
+import '../services/device_id_service.dart';
 
 class PuntosMovilesScreen extends StatefulWidget {
   const PuntosMovilesScreen({super.key});
@@ -13,117 +17,126 @@ class PuntosMovilesScreen extends StatefulWidget {
 
 class _PuntosMovilesScreenState extends State<PuntosMovilesScreen> {
   late GoogleMapController _mapController;
-  final Set<Marker> _markers = {};
+  final Map<String, Marker> _userMarkers = {};
   final Set<Polyline> _polylines = {};
-  late BitmapDescriptor _autoIcon;
-  Timer? _timer;
-  List<LatLng> _routePoints = [];
-
-  // Tus puntos fijos
+  late String currentUserId;
   final List<LatLng> _stops = [
     LatLng(-16.418406, -71.475417),
     LatLng(-16.407764, -71.478325),
-    LatLng(-16.413690, -71.494548),
-    LatLng(-16.410015, -71.495162),
-    LatLng(-16.406820, -71.504452),
-    LatLng(-16.413021, -71.501057),
   ];
-
-  int _currentSegment = 0;
-  int _polyIndex = 0;
-  late LatLng _autoPos;
 
   @override
   void initState() {
     super.initState();
-    _autoPos = _stops[0];
-    _loadAutoIcon().then((_) => _loadRouteAndAnimate());
+    _initializeTracking();
   }
 
-  Future<void> _loadAutoIcon() async {
-    _autoIcon = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(size: Size(32,32)),
-      'assets/images/auto.png',
-    );
+  Future<void> _initializeTracking() async {
+    currentUserId = await getOrCreateUserId(); // obtiene el ID único del dispositivo
+    _setupInitialPosition();
+    _updateFixedMarkers();
+
+    LocationSubscriptionManager(
+      client: graphQLClient.value,
+      onLocationUpdate: (userId, lat, lng) {
+        final isCurrentUser = userId == currentUserId;
+        final marker = Marker(
+          markerId: MarkerId(userId),
+          position: LatLng(lat, lng),
+          infoWindow: InfoWindow(title: isCurrentUser ? 'Mi ubicación' : 'Usuario $userId'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(
+            isCurrentUser ? BitmapDescriptor.hueRed : BitmapDescriptor.hueBlue,
+          ),
+        );
+
+        setState(() {
+          _userMarkers[userId] = marker;
+        });
+
+        if (isCurrentUser) {
+          _mapController.animateCamera(CameraUpdate.newLatLng(marker.position));
+        }
+
+        print('🟢 [$userId] Nueva ubicación: $lat, $lng');
+      },
+    ).start();
+
+    _startSendingLocation();
   }
 
-  Future<void> _loadRouteAndAnimate() async {
-    // Pide la ruta entre el punto actual y el siguiente
-    final origin = _stops[_currentSegment];
-    final dest   = _stops[(_currentSegment+1)%_stops.length];
-    final url =
-        'https://maps.googleapis.com/maps/api/directions/json?'
-        'origin=${origin.latitude},${origin.longitude}'
-        '&destination=${dest.latitude},${dest.longitude}'
-        '&key=TU_DIRECTIONS_API_KEY';
-
-    final res = await http.get(Uri.parse(url));
-    final data = json.decode(res.body);
-    final points = PolylinePoints()
-        .decodePolyline(data['routes'][0]['overview_polyline']['points']);
-
-    _routePoints = points.map((p) => LatLng(p.latitude, p.longitude)).toList();
-
-    // Dibuja la ruta en el mapa
-    _polylines.add(Polyline(
-      polylineId: const PolylineId('route'),
-      points: _routePoints,
-      color: Colors.blue,
-      width: 4,
-    ));
-
-    setState(() {});
-    _startAutoAlongRoute();
-  }
-
-  void _startAutoAlongRoute() {
-    _polyIndex = 0;
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (_polyIndex < _routePoints.length) {
-        _autoPos = _routePoints[_polyIndex++];
-      } else {
-        // Llegó al final de este segmento: pasa al siguiente
-        _currentSegment = (_currentSegment+1)%_stops.length;
-        _loadRouteAndAnimate(); // recarga ruta
+  void _startSendingLocation() {
+    Timer.periodic(const Duration(seconds: 60), (_) async {
+      try {
+        final pos = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+        await sendLocation(
+          graphQLClient.value,
+          currentUserId,
+          pos.latitude,
+          pos.longitude,
+        );
+      } catch (e) {
+        print('⚠️ Error obteniendo posición para enviar: $e');
       }
-      _updateMarkers();
-      _mapController.animateCamera(CameraUpdate.newLatLng(_autoPos));
     });
   }
 
-  void _updateMarkers() {
-    final m = <Marker>{
-      // Puntos fijos
-      for (var i = 0; i < _stops.length; i++)
-        Marker(
-          markerId: MarkerId('stop_$i'),
-          position: _stops[i],
-          infoWindow: InfoWindow(title: 'Punto Fijo ${i+1}'),
-        ),
-      // Auto
-      Marker(
-        markerId: const MarkerId('auto'),
-        position: _autoPos,
-        icon: _autoIcon,
-      ),
-    };
+
+  Future<void> _setupInitialPosition() async {
+    print("**********************************************************************************");
+    print("entro aquiiiiiiiiiiiiiiiiiiiiiiiiii");
+    print("**********************************************************************************");
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      print('🛑 El GPS está desactivado.');
+      return;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print('🛑 Permiso de ubicación denegado.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('🛑 Permiso de ubicación denegado permanentemente.');
+      return;
+    }
+
+    final pos = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    final myMarker = Marker(
+      markerId: MarkerId(currentUserId),
+      position: LatLng(pos.latitude, pos.longitude),
+      infoWindow: InfoWindow(title: 'Mi posición inicial'),
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    );
+
     setState(() {
-      _markers
-        ..clear()
-        ..addAll(m);
+      _userMarkers[currentUserId] = myMarker;
     });
+
+    // Centra el mapa en tu posición
+    _mapController.animateCamera(CameraUpdate.newLatLng(myMarker.position));
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+
+  void _updateFixedMarkers() {
+    for (var i = 0; i < _stops.length; i++) {
+      final marker = Marker(
+        markerId: MarkerId('stop_$i'),
+        position: _stops[i],
+        infoWindow: InfoWindow(title: 'Punto Fijo ${i + 1}'),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+      );
+      _userMarkers['stop_$i'] = marker;
+    }
   }
 
   void _onMapCreated(GoogleMapController c) {
     _mapController = c;
-    _updateMarkers();
+    setState(() {}); // Para refrescar marcadores
   }
 
   @override
@@ -133,9 +146,18 @@ class _PuntosMovilesScreenState extends State<PuntosMovilesScreen> {
       body: GoogleMap(
         onMapCreated: _onMapCreated,
         initialCameraPosition: CameraPosition(target: _stops[0], zoom: 14),
-        markers: _markers,
+        markers: _userMarkers.values.toSet(),
         polylines: _polylines,
         myLocationEnabled: true,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.gps_fixed),
+        onPressed: () {
+          final marker = _userMarkers[currentUserId];
+          if (marker != null) {
+            _mapController.animateCamera(CameraUpdate.newLatLng(marker.position));
+          }
+        },
       ),
     );
   }
