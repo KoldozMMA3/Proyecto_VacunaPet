@@ -1,5 +1,5 @@
-#Sin Rabia - Control y Prevención de la Rabia Canina
-Descripción del Proyecto
+Descripción del Proyecto VacunaPet
+
 "Sin Rabia" es una aplicación móvil diseñada para concientizar y facilitar el acceso a la vacunación contra la rabia canina en zonas urbanas. A través de mapas interactivos, notificaciones geolocalizadas y un sistema de autenticación de usuarios, la app busca ayudar a los dueños de mascotas a localizar puntos de vacunación fijos y móviles, y recordarles las fechas de vacunación.
 
 Esta aplicación tiene como objetivo contribuir a la erradicación de la rabia, protegiendo tanto a los animales como a los humanos.
