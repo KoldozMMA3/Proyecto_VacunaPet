@@ -43,7 +43,7 @@ class _PuntosMovilesScreenState extends State<PuntosMovilesScreen> {
         final marker = Marker(
           markerId: MarkerId(userId),
           position: LatLng(lat, lng),
-          infoWindow: InfoWindow(title: isCurrentUser ? 'Mi ubicación' : 'Usuario $userId'),
+          infoWindow: InfoWindow(title: isCurrentUser ? 'Mi ubicación' : 'Enfermera $userId'),
           icon: BitmapDescriptor.defaultMarkerWithHue(
             isCurrentUser ? BitmapDescriptor.hueRed : BitmapDescriptor.hueBlue,
           ),
