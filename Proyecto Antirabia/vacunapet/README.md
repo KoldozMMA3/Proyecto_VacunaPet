@@ -43,8 +43,6 @@ Login: Los usuarios pueden iniciar sesión para acceder a sus datos.
 
 Visualización de puntos de vacunación: La app muestra puntos fijos y móviles de vacunación en un mapa interactivo usando la Google Maps API.
 
-Notificaciones geolocalizadas: Los usuarios reciben notificaciones cuando las unidades móviles están cerca de su ubicación.
-
 Formulario de denuncias: Los usuarios pueden reportar casos sospechosos de rabia a través de un formulario.
 
 Interacción con el backend: El frontend se comunica con el backend mediante GraphQL, permitiendo obtener y enviar datos en tiempo real.
