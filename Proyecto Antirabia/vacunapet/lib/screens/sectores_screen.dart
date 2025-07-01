@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'puntos_fijos_screen.dart';
-import 'puntos_moviles_screen.dart';
-import 'informacion_screen.dart'; // Asegúrate de importar la nueva pantalla
+import 'puntos_fijos_screen.dart'; // Importamos las pantallas de puntos fijos
+import 'puntos_moviles_screen.dart'; // Importamos las pantallas de puntos móviles
+import 'informacion_screen.dart'; // Asegúrate de importar la pantalla de información
 
 class SectoresScreen extends StatelessWidget {
   const SectoresScreen({super.key});
@@ -12,7 +12,7 @@ class SectoresScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sectores de Vacunación'),
       ),
-      // Agregamos el menú de hamburguesa (Drawer)
+      // Modificación del Drawer (menú lateral) con preguntas informativas
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -36,7 +36,9 @@ class SectoresScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const InformacionScreen(section: 'vacunacion'), // Pasamos la sección 'vacunacion'
+                    builder: (context) => const InformacionScreen(
+                      section: 'vacunacion', // Indicamos la sección para la información
+                    ),
                   ),
                 );
               },
@@ -47,7 +49,9 @@ class SectoresScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const InformacionScreen(section: 'sintomas'), // Pasamos la sección 'sintomas'
+                    builder: (context) => const InformacionScreen(
+                      section: 'sintomas',
+                    ),
                   ),
                 );
               },
@@ -58,7 +62,9 @@ class SectoresScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const InformacionScreen(section: 'prevencion'), // Pasamos la sección 'prevencion'
+                    builder: (context) => const InformacionScreen(
+                      section: 'prevencion',
+                    ),
                   ),
                 );
               },
@@ -69,7 +75,9 @@ class SectoresScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const InformacionScreen(section: 'mordido'), // Pasamos la sección 'mordido'
+                    builder: (context) => const InformacionScreen(
+                      section: 'mordido',
+                    ),
                   ),
                 );
               },
@@ -80,7 +88,9 @@ class SectoresScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const InformacionScreen(section: 'contacto'), // Pasamos la sección 'contacto'
+                    builder: (context) => const InformacionScreen(
+                      section: 'contacto',
+                    ),
                   ),
                 );
               },
