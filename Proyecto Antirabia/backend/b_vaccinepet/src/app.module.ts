@@ -5,6 +5,7 @@ import { join } from 'path';
 
 import { LocationModule } from './location/location.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PrismaModule } from './prisma/prisma.module';
     }),
     PrismaModule,
     LocationModule,
+    UserModule,
   ],
 })
 export class AppModule {}

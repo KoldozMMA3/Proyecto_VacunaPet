@@ -19,3 +19,16 @@ mutation {
     timestamp
   }
 }
+
+# Para probar si funcion la tabla USER
+mutation {
+  register(input: {
+    nombre: "Juan Pérez",
+    usuario: "juan123",
+    contrasena: "secreta"
+  }) {
+    id
+    nombre
+    usuario
+  }
+}
