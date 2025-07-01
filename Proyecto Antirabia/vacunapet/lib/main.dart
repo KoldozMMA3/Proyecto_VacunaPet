@@ -1,8 +1,13 @@
-import 'package:flutter/material.dart';
-import 'screens/login_screen.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:io';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'screens/login_screen.dart';
+
+Future<void> main() async {
+  
+  await dotenv.load(fileName: 'assets/env/.env.dev');
+  
   runApp(const MyApp());
 }
 
