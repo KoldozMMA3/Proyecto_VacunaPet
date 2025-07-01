@@ -25,7 +25,6 @@ Puntos Fijos: Muestra una lista o mapa con los puntos de vacunación fijos dispo
 
 Puntos Móviles: Muestra el recorrido en tiempo real de personas que se mueven por la zona para realizar las vacunaciones y notificaciones automáticas cuando estén cerca del usuario.
 
-Notificaciones Geolocalizadas: El sistema enviará notificaciones a los usuarios sobre la cercanía de las personas de vacunación usando geolocalización.
 
 Capturas de Pantalla
 
