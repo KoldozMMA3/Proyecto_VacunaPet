@@ -33,7 +33,6 @@ Thumbs.db
 prisma/dev.db
 prisma/dev.sqlite
 prisma/dev.db-journal
-prisma/migrations/
 *.sqlite
 *.db
 

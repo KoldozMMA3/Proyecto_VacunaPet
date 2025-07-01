@@ -96,3 +96,10 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## Levantar el servidor
+- $ npm install
+- Tener instalado una base de datos en posgresql de nombre: db_vaccinepet
+- Crear el archivo ".env"
+- $ npx prisma db push
