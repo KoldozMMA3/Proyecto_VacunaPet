@@ -12,7 +12,7 @@ Frontend (Aplicación Móvil - Flutter)
 
 Flutter: Framework para crear aplicaciones móviles nativas en iOS y Android con una experiencia de usuario fluida y de alto rendimiento.
 
-GraphQL: Utilizado para consultas eficientes al backend, mejorando el rendimiento y la escalabilidad, permitiendo obtener solo los datos necesarios.
+GraphQL: Tecnología principal para manejar consultas y mutaciones, permitiendo una comunicación eficiente y en tiempo real con el frontend."
 
 Google Maps API: Muestra los puntos de vacunación en un mapa interactivo y permite rastrear en tiempo real la ubicación de las unidades móviles.
 
@@ -27,7 +27,7 @@ Backend (Servidor - NestJS, GraphQL, Prisma, PostgreSQL)
 
 NestJS: Framework backend en Node.js basado en TypeScript, utilizado para crear una API modular y escalable.
 
-GraphQL: Tecnología principal para manejar consultas y mutaciones, permitiendo una comunicación eficiente y en tiempo real con el backend.
+GraphQL: Tecnología principal para manejar consultas y mutaciones, permitiendo una comunicación eficiente y en tiempo real con el Frontend.
 
 Prisma: ORM que facilita la interacción con la base de datos PostgreSQL, permitiendo realizar operaciones CRUD de manera sencilla.
 
