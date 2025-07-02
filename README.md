@@ -4,14 +4,39 @@ Descripción del Proyecto VacunaPet
 
 Esta aplicación tiene como objetivo contribuir a la erradicación de la rabia, protegiendo tanto a los animales como a los humanos.
 
+
 Tecnologías Utilizadas
-Flutter: Framework principal para el desarrollo de la aplicación móvil, permitiendo una interfaz nativa para iOS y Android.
 
-Firebase (o Supabase si decides cambiar): Base de datos en tiempo real para almacenar la información de usuarios, puntos de vacunación y notificaciones. Elegimos Firebase por su fácil integración con Flutter y su escalabilidad.
+Frontend (Aplicación Móvil - Flutter)
 
-Google Maps API: Utilizada para mostrar los puntos de vacunación en un mapa interactivo, con seguimiento en tiempo real de las personas que se mueven por la zona, no vehículos.
 
-Dart: Lenguaje de programación utilizado para escribir el código de la aplicación.
+Flutter: Framework para crear aplicaciones móviles nativas en iOS y Android con una experiencia de usuario fluida y de alto rendimiento.
+
+GraphQL: Utilizado para consultas eficientes al backend, mejorando el rendimiento y la escalabilidad, permitiendo obtener solo los datos necesarios.
+
+Google Maps API: Muestra los puntos de vacunación en un mapa interactivo y permite rastrear en tiempo real la ubicación de las unidades móviles.
+
+Dart: Lenguaje de programación para el desarrollo de aplicaciones nativas en Flutter, manejando la lógica de la UI y la interacción con el backend.
+
+BLoC: Patrón de diseño para gestionar el estado de la aplicación de manera eficiente, separando la lógica de negocios de la interfaz de usuario.
+
+
+
+Backend (Servidor - NestJS, GraphQL, Prisma, PostgreSQL)
+
+
+NestJS: Framework backend en Node.js basado en TypeScript, utilizado para crear una API modular y escalable.
+
+GraphQL: Tecnología principal para manejar consultas y mutaciones, permitiendo una comunicación eficiente y en tiempo real con el backend.
+
+Prisma: ORM que facilita la interacción con la base de datos PostgreSQL, permitiendo realizar operaciones CRUD de manera sencilla.
+
+PostgreSQL: Base de datos relacional para almacenar los datos de usuarios, puntos de vacunación y ubicaciones en tiempo real.
+
+
+Arquitectura General del Proyecto
+
+El frontend se comunica con el backend a través de GraphQL, usando Prisma para interactuar con la base de datos PostgreSQL. Google Maps API proporciona la visualización interactiva de los puntos de vacunación. El patrón BLoC en el frontend garantiza un flujo de datos eficiente y escalable entre la UI y el backend.
 
 
 Funcionalidades Principales
